@@ -86,7 +86,7 @@ Open Claude and say, for example: *"Do the lecture Maya and Illusion as Study Gu
 
 ## 5. Things to know
 
-- **Drive uploads:** the Drive connector cannot upload files as large as these PDFs, so drag the PDF into the Drive folder by hand.
+- **Drive uploads:** the Drive connector cannot upload files as large as these PDFs directly. When Swamiji's Mac is linked to the chat, Claude saves the PDF into `~/My Drive (mail@vedanta.nz)/Ritam Courses /Study of Vivekananda Lectures/` and Google Drive for Desktop syncs it. Otherwise, drag it in by hand. Note the trailing space in the "Ritam Courses " folder name.
 - **Tracker:** the sheet cannot be edited cell by cell through Claude. Claude replaces the whole sheet with an updated copy, so edit by hand if you prefer.
 - **Corrections in Guide 01:**
   - ¶8: restored a missing sentence ("All that day he did not return to his Master. The next day…").
