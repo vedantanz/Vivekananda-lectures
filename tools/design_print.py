@@ -74,12 +74,15 @@ ol.points strong{{color:var(--deep)}}
 .note b{{color:var(--ac)}}
 
 /* Outline */
-.outline{{display:flex;flex-wrap:wrap;gap:5mm}}
-.ocard{{width:76mm;background:var(--soft);border-radius:2mm;padding:4mm 5mm;break-inside:avoid}}
-.ocard .pk{{font-size:7.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}}
-.ocard h4{{margin:0.5mm 0 2mm;color:var(--deep);font-size:12pt}}
-.ocard ol{{margin:0;padding-left:6mm;font-size:9.2pt;line-height:1.55}}
-.ocard em{{color:var(--muted);font-size:8pt}}
+.outline{{display:block}}
+.ocard{{background:rgba(255,255,255,.82);border:0.7pt solid var(--rule);border-top:2.4pt solid var(--ac);border-radius:2mm;padding:3.2mm 5mm 2.6mm;margin:0 0 4.2mm;break-inside:avoid}}
+.ocard .hd{{display:flex;align-items:baseline;gap:3mm;margin-bottom:1.6mm}}
+.ocard .pk{{font-size:7.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);white-space:nowrap}}
+.ocard h4{{margin:0;color:var(--deep);font-size:12pt}}
+.orow{{display:flex;align-items:baseline;font-size:9.6pt;line-height:1.5;padding:0.9mm 0;border-top:0.4pt solid var(--rule)}}
+.orow .on{{width:7mm;flex:none;color:var(--ac);font-weight:700;font-size:8.6pt}}
+.orow .ot{{flex:1}}
+.orow .op{{flex:none;width:12mm;text-align:right;color:var(--muted);font-size:8.4pt}}
 
 /* Lecture */
 .lhead{{text-align:center;padding:10mm 0 6mm}}
@@ -147,9 +150,10 @@ def lecture():
 
 def outline():
     return '<div class="outline">' + "".join(
-        f'<div class="ocard"><div class="pk">{p}</div><h4>{esc(t)}</h4><ol>' +
-        "".join(f'<li value="{n}">{esc(h)} <em>¶{", ".join(map(str, ps))}</em></li>' for n, h, ps in secs) +
-        '</ol></div>' for p, t, secs in PARTS) + '</div>'
+        f'<div class="ocard"><div class="hd"><span class="pk">{p}</span><h4>{esc(t)}</h4></div>' +
+        "".join(f'<div class="orow"><span class="on">{n}</span><span class="ot">{esc(h)}</span>'
+                f'<span class="op">\u00b6{", ".join(map(str, ps))}</span></div>' for n, h, ps in secs) +
+        '</div>' for p, t, secs in PARTS) + '</div>'
 
 def gloss():
     return '<dl class="gloss">' + "".join(f'<div class="g"><dt>{esc(t)}</dt><dd>{esc(d)}</dd></div>' for t, d in GLOSSARY) + '</dl>'
