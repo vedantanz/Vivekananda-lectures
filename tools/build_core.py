@@ -1,10 +1,16 @@
 import re, html, base64, sys
-sys.path.insert(0, "/home/claude/build")
+import sys, os
+TOOLS = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(TOOLS)
+GUIDE = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else os.environ.get("GUIDE_DIR", "")
+if not GUIDE or not os.path.isfile(os.path.join(GUIDE, "content.py")):
+    sys.exit("Usage: python3 tools/<script>.py guides/NN-slug   (folder must contain content.py and lecture.txt)")
+sys.path.insert(0, GUIDE); sys.path.insert(0, TOOLS)
 from content import *
 
-SRC = "/home/claude/src/maya_and_freedom.txt"
-LOGO = "/home/claude/vedantanz-logo.png"
-OUT = "/home/claude/out"
+SRC = os.path.join(GUIDE, "lecture.txt")
+LOGO = os.path.join(ROOT, "assets", "logo.png")
+OUT = GUIDE
 import os; os.makedirs(OUT, exist_ok=True)
 
 lines = [l.strip() for l in open(SRC, encoding="utf-8").read().split("\n") if l.strip()]

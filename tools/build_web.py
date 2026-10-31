@@ -1,5 +1,6 @@
 import sys, json, html, re, base64
-sys.path.insert(0, "/home/claude/build")
+import os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import build_core as _bc
 from content import *
 import build_core as B
 from themes import theme_for
@@ -94,5 +95,5 @@ footer{{text-align:center;color:var(--muted);font-size:13px;margin-top:48px;bord
 <footer><p style="font-style:italic;color:var(--ink);font-size:14px">Join the <b>Study of Vivekananda Lectures</b> course on our website, <a href="https://vedanta.nz" style="color:var(--ac)">vedanta.nz</a>.</p>{M['org']}<br>{M['course']}<br><a href="https://vedanta.nz" style="color:var(--gold)">vedanta.nz</a></footer>
 </div></body></html>"""
 
-open(f"{B.OUT}/maya-and-freedom.html", "w").write(page)
+open(os.path.join(B.OUT, "index.html"), "w").write(page)
 print("WEB written")

@@ -1,5 +1,5 @@
 # Editorial content for Study Guide No. 1: Maya and Freedom
-# Lecture text is loaded from /home/claude/src/maya_and_freedom.txt (CWSV docx, Vol 2, Jnana-Yoga)
+# Lecture text: lecture.txt in this folder (extracted from CWSV 1-9.docx, Vol 2, Jnana-Yoga)
 
 META = {
     "guide_no": 1,
@@ -178,3 +178,6 @@ EDITORIAL_NOTE = (
     "have been corrected (¶5 “a wall”, ¶8 “the other two”, ¶16 “the difference”); a misspelling in the "
     "Sanskrit verse in ¶12 has been corrected; and double hyphens are set as dashes."
 )
+
+# Short line from the lecture for the cover
+COVER_QUOTE = "In freedom it rises, in freedom it rests and into freedom it melts away."

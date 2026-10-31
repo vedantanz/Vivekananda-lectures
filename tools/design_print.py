@@ -1,25 +1,28 @@
 import sys
-sys.path.insert(0, "/home/claude/build")
+import os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build_core import *
 from themes import theme_for
 
-COVER_QUOTE = "In freedom it rises, in freedom it rests and into freedom it melts away."
 T = theme_for(M["guide_no"])
 NO = f"{M['guide_no']:02d}"
-ART = "/home/claude/assets/lineart_src.png"
+ART = os.path.join(ROOT, "assets", "vivekananda-lineart.png")
 def _make_art():
     from PIL import Image, ImageOps
     im = Image.open(ART).convert("L"); a = ImageOps.invert(im).point(lambda v: 0 if v < 40 else min(255, int((v-40)*1.35)))
     def tint(hexc, k, path):
         rgb = tuple(int(hexc[i:i+2], 16) for i in (1, 3, 5))
         o = Image.new("RGBA", im.size, rgb + (0,)); o.putalpha(a.point(lambda v: int(v*k))); o.save(path, optimize=True)
-    tint("#E9C987", 0.9, f"/home/claude/build/cover_art_{NO}.png")
-    tint(T["accent"], 0.065, f"/home/claude/build/wm_{NO}.png")
+    tint("#E9C987", 0.9, os.path.join(GUIDE, "cover-art.png"))
+    tint(T["accent"], 0.065, os.path.join(GUIDE, "watermark.png"))
 _make_art()
-COVER_ART = f"/home/claude/build/cover_art_{NO}.png"
-WM = f"/home/claude/build/wm_{NO}.png"
+COVER_ART = os.path.join(GUIDE, "cover-art.png")
+WM = os.path.join(GUIDE, "watermark.png")
+FONTS = os.path.join(ROOT, "assets", "fonts")
 
 CSS = f"""
+@font-face{{font-family:Lora;src:url(file://{FONTS}/Lora-Variable.ttf);font-weight:400 700;font-style:normal}}
+@font-face{{font-family:Lora;src:url(file://{FONTS}/Lora-Italic-Variable.ttf);font-weight:400 700;font-style:italic}}
+@font-face{{font-family:FreeSerif;src:url(file://{FONTS}/FreeSerif.ttf)}}
 :root{{--maroon:#6B1414;--gold:#9C6B14;--goldl:#E9C987;--ink:#2a2420;--muted:#6d625a;--paper:#fffdf8;--rule:#e6dccb;
 --ac:{T['accent']};--deep:{T['deep']};--soft:{T['soft']};--glow:{T['glow']}}}
 @page{{size:A4;margin:24mm 20mm 22mm 24mm;background:url(file://{WM}) no-repeat right -14mm bottom 4mm;background-size:118mm auto;
@@ -196,6 +199,6 @@ def doc():
 
 if __name__ == "__main__":
     from weasyprint import HTML
-    pdf = f"{OUT}/Vivekananda_Lecture_{NO}_Maya_and_Freedom.pdf"
+    pdf = os.path.join(OUT, f"Vivekananda_Lecture_{NO}_" + M["title"].replace(" ", "_") + ".pdf")
     HTML(string=doc(), base_url="/").write_pdf(pdf)
     print("PDF", pdf, T["name"])
