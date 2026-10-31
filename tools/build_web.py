@@ -38,16 +38,17 @@ page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 *{{box-sizing:border-box}}
 body{{margin:0;background:var(--bg);color:var(--ink);font-family:Lora,Georgia,serif;font-size:15px;line-height:1.75}}
 .wrap{{max-width:720px;margin:0 auto;padding:0 16px 64px}}
-header.hero{{text-align:center;padding:36px 16px 34px;border-bottom:3px solid var(--goldl);color:#fff;
+header.hero{{position:relative;overflow:hidden;text-align:left;padding:24px 16px 30px;min-height:460px;border-bottom:3px solid var(--goldl);color:#fff;
 background:radial-gradient(circle at 50% 30%, {T['glow']} 0%, {T['accent']} 38%, {T['deep']} 100%)}}
 header.hero .org,header.hero .series{{color:var(--goldl)}} header.hero h1{{color:#fff}} header.hero .del{{color:#e8e0d4}}
 header.hero .badge{{border-color:var(--goldl);color:var(--goldl)}}
-.plate{{display:inline-block;width:132px;height:132px;border-radius:50%;background:#fffdf8;box-shadow:0 0 0 3px var(--goldl),0 0 0 14px rgba(233,201,135,.15);margin-top:16px}}
-.plate img{{width:96px;margin-top:16px}}
+.heroart{{position:absolute;right:-125px;bottom:0;height:430px;width:auto !important;opacity:.8;pointer-events:none}} .hshade{{position:absolute;inset:0;background:linear-gradient(to right,{T['deep']} 42%,rgba(0,0,0,0) 80%);opacity:.85}} .brandrow{{display:flex;align-items:center;gap:10px}} .htext{{max-width:62%;margin-top:70px}} @media (min-width:600px){{.heroart{{right:4%}} .htext{{max-width:55%}}}} header.hero>*:not(.heroart){{position:relative}}
+.plate{{display:inline-block;width:52px;height:52px;border-radius:50%;background:#fffdf8;box-shadow:0 0 0 2px var(--goldl);flex:none}}
+.plate img{{width:38px !important;margin:6px 0 0 7px}}
 header img{{width:110px;height:auto}}
 .org{{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--maroon)}}
 .series{{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:14px}}
-h1{{font-size:28px;line-height:1.2;color:var(--maroon);margin:8px 0 4px}}
+h1{{font-size:34px;line-height:1.08;color:var(--maroon);margin:8px 0 4px}}
 .by{{font-style:italic}} .del{{color:var(--muted);font-size:13.5px}}
 .badge{{display:inline-block;margin-top:12px;border:1px solid var(--gold);color:var(--gold);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:3px 10px}}
 nav.tabs{{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--rule);overflow-x:auto;white-space:nowrap}}
@@ -74,13 +75,12 @@ dl dt{{font-weight:700;color:var(--maroon);margin-top:12px}} dl dd{{margin:0}}
 ol.qs li{{margin-bottom:14px}}
 footer{{text-align:center;color:var(--muted);font-size:13px;margin-top:48px;border-top:1px solid var(--rule);padding-top:20px}}
 </style></head><body>
-<header class="hero">
-  <div class="org">{M['org']}</div>
-  <div class="plate"><img src="{B.LOGO_URI}" alt="Ramakrishna Vedanta Centre NZ logo"></div>
-  <div class="series">{M['series']}</div>
+<header class="hero"><img class="heroart" src="cover-art.png" alt="Line drawing of Swami Vivekananda"><div class="hshade"></div>
+  <div class="brandrow"><div class="plate"><img src="{B.LOGO_URI}" alt="Ramakrishna Vedanta Centre NZ logo"></div><div class="org">Ramakrishna Vedanta<br>Centre NZ</div></div>
+  <div class="htext"><div class="series">Vedanta Lectures of Swami Vivekananda</div>
   <h1>{M['title']}</h1>
   <div class="by">Swami Vivekananda</div><div class="del">{M['delivered']}</div>
-  <div class="badge">Study Guide No. {M['guide_no']}</div>
+  <div class="badge">Study Guide No. {M['guide_no']}</div></div>
 </header>
 <nav class="tabs"><a href="#summary">Summary</a><a href="#outline">Outline</a><a href="#lecture">Lecture</a><a href="#glossary">Glossary</a><a href="#bridge">Bridge to Wellbeing</a><a href="#questions">Questions</a></nav>
 <div class="wrap">

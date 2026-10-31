@@ -6,47 +6,56 @@ from themes import theme_for
 COVER_QUOTE = "In freedom it rises, in freedom it rests and into freedom it melts away."
 T = theme_for(M["guide_no"])
 NO = f"{M['guide_no']:02d}"
+ART = "/home/claude/assets/lineart_src.png"
+def _make_art():
+    from PIL import Image, ImageOps
+    im = Image.open(ART).convert("L"); a = ImageOps.invert(im).point(lambda v: 0 if v < 40 else min(255, int((v-40)*1.35)))
+    def tint(hexc, k, path):
+        rgb = tuple(int(hexc[i:i+2], 16) for i in (1, 3, 5))
+        o = Image.new("RGBA", im.size, rgb + (0,)); o.putalpha(a.point(lambda v: int(v*k))); o.save(path, optimize=True)
+    tint("#E9C987", 0.9, f"/home/claude/build/cover_art_{NO}.png")
+    tint(T["accent"], 0.065, f"/home/claude/build/wm_{NO}.png")
+_make_art()
+COVER_ART = f"/home/claude/build/cover_art_{NO}.png"
+WM = f"/home/claude/build/wm_{NO}.png"
 
 CSS = f"""
 :root{{--maroon:#6B1414;--gold:#9C6B14;--goldl:#E9C987;--ink:#2a2420;--muted:#6d625a;--paper:#fffdf8;--rule:#e6dccb;
 --ac:{T['accent']};--deep:{T['deep']};--soft:{T['soft']};--glow:{T['glow']}}}
-@page{{size:A4;margin:24mm 20mm 22mm 24mm;
+@page{{size:A4;margin:24mm 20mm 22mm 24mm;background:url(file://{WM}) no-repeat right -14mm bottom 4mm;background-size:118mm auto;
   @top-left{{content:"Vedanta Lectures of Swami Vivekananda";font:8pt Lora,serif;letter-spacing:.08em;color:#a39890}}
   @top-right{{content:"{M['title']}";font:italic 8.5pt Lora,serif;color:{T['accent']}}}
   @bottom-left{{content:"Ramakrishna Vedanta Centre NZ  ·  Join the Study of Vivekananda Lectures course at vedanta.nz";font:italic 7.8pt Lora,serif;color:#8a7f76;vertical-align:top;padding-top:5mm}}@bottom-right{{content:counter(page);font:700 9pt Lora,serif;color:{T['accent']};vertical-align:top;padding-top:4.6mm}}}}
-@page cover{{margin:0;@top-left{{content:none}}@top-right{{content:none}}@bottom-left{{content:none}}@bottom-right{{content:none}}}}
+@page cover{{margin:0;background:none;@top-left{{content:none}}@top-right{{content:none}}@bottom-left{{content:none}}@bottom-right{{content:none}}}}
 @page opener{{@top-left{{content:none}}@top-right{{content:none}}}}
 body{{font-family:Lora,serif;font-size:10.6pt;line-height:1.62;color:var(--ink)}}
 
 /* ---------- Cover ---------- */
-.cover{{page:cover;width:210mm;height:297mm;position:relative;overflow:hidden;background:var(--paper)}}
-.field{{position:absolute;left:0;top:0;width:210mm;height:186mm;
-  background:radial-gradient(circle at 50% 46%, {T['glow']} 0%, {T['accent']} 34%, {T['deep']} 100%)}}
-.ring{{position:absolute;border-radius:50%;border:0.5pt solid rgba(233,201,135,.55)}}
-.r1{{width:96mm;height:96mm;left:57mm;top:24mm}}
-.r2{{width:126mm;height:126mm;left:42mm;top:9mm;border-color:rgba(233,201,135,.32)}}
-.r3{{width:160mm;height:160mm;left:25mm;top:-8mm;border-color:rgba(233,201,135,.18)}}
-.plate{{position:absolute;width:66mm;height:66mm;left:72mm;top:39mm;border-radius:50%;background:#fffdf8;
-  box-shadow:0 0 0 2.2pt var(--goldl)}}
-.plate img{{width:46mm;margin:8mm 0 0 10mm}}
-.topline{{position:absolute;top:13mm;left:0;width:210mm;text-align:center;font-size:8.5pt;letter-spacing:.28em;
-  text-transform:uppercase;color:var(--goldl)}}
-.bignum{{position:absolute;right:14mm;top:6mm;font-size:64pt;font-weight:700;color:rgba(255,255,255,.10);line-height:1}}
-.titleblock{{position:absolute;top:116mm;left:0;width:210mm;text-align:center;color:#fff}}
-.titleblock .series{{font-size:9pt;letter-spacing:.26em;text-transform:uppercase;color:var(--goldl)}}
-.titleblock h1{{font-size:40pt;line-height:1.05;margin:4mm 0 3mm;font-weight:700;letter-spacing:.01em}}
-.titleblock .by{{font-size:13pt;font-style:italic;color:#f4ece0}}
-.wave{{position:absolute;top:183mm;left:0;width:210mm;height:6mm;border-top:1.6pt solid var(--goldl)}}
-.lower{{position:absolute;top:204mm;left:24mm;width:162mm;text-align:center}}
-.quote{{font-size:15pt;font-style:italic;color:var(--deep);line-height:1.45}}
-.quote:before{{content:"\\201C";color:var(--gold);font-size:26pt;line-height:0;vertical-align:-9pt;margin-right:1mm}}
-.qsrc{{font-size:8.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:2.5mm}}
-.meta{{margin-top:12mm;display:flex;justify-content:center;gap:8mm;font-size:9pt;color:var(--muted)}}
-.chip{{display:inline-block;background:var(--ac);color:#fff;font-size:8.5pt;letter-spacing:.18em;text-transform:uppercase;padding:1.6mm 4.5mm;border-radius:10mm}}
-.org{{position:absolute;bottom:14mm;left:0;width:210mm;text-align:center}}
-.org .n{{font-size:11pt;letter-spacing:.22em;text-transform:uppercase;color:var(--maroon);font-weight:700}}
-.org .c{{font-size:8.5pt;color:var(--muted);margin-top:1mm;letter-spacing:.04em}}
-.foot{{position:absolute;bottom:0;left:0;width:210mm;height:5mm;background:var(--ac)}}
+.cover{{page:cover;width:210mm;height:297mm;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 120mm 160mm at 150mm 120mm, {T['glow']} 0%, {T['accent']} 45%, {T['deep']} 100%)}}
+.art{{position:absolute;left:52mm;bottom:0;height:238mm}}
+.shade{{position:absolute;left:0;bottom:0;width:210mm;height:70mm;
+  background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, {T['deep']} 78%)}}
+.lshade{{position:absolute;left:0;top:0;width:120mm;height:297mm;
+  background:linear-gradient(to right, {T['deep']} 0%, rgba(0,0,0,0) 100%);opacity:.55}}
+.frame{{position:absolute;left:8mm;top:8mm;width:194mm;height:281mm;border:0.6pt solid rgba(233,201,135,.45)}}
+.brand{{position:absolute;left:18mm;top:18mm;display:flex;align-items:center;gap:4mm}}
+.brand .lp{{width:20mm;height:20mm;border-radius:50%;background:#fffdf8;box-shadow:0 0 0 1.2pt var(--goldl)}}
+.brand .lp img{{width:14mm;margin:2.4mm 0 0 3mm}}
+.brand .t{{font-size:8.5pt;letter-spacing:.22em;text-transform:uppercase;color:var(--goldl);line-height:1.5}}
+.bignum{{position:absolute;right:16mm;top:12mm;font-size:60pt;font-weight:700;color:rgba(255,255,255,.12);line-height:1}}
+.titleblock{{position:absolute;top:74mm;left:18mm;width:92mm;color:#fff}}
+.titleblock .series{{font-size:8.5pt;letter-spacing:.24em;text-transform:uppercase;color:var(--goldl);line-height:1.6}}
+.titleblock .rule{{width:18mm;border-top:1.4pt solid var(--goldl);margin:5mm 0}}
+.titleblock h1{{font-size:44pt;line-height:1.02;margin:0 0 4mm;font-weight:700}}
+.titleblock .by{{font-size:14pt;font-style:italic;color:#f4ece0}}
+.quote{{position:absolute;top:156mm;left:18mm;width:82mm;font-size:12.5pt;font-style:italic;color:#f4ece0;line-height:1.5}}
+.quote:before{{content:"“";color:var(--goldl);font-size:30pt;display:block;line-height:.6;margin-bottom:1mm}}
+.qsrc{{font-size:7.5pt;letter-spacing:.18em;text-transform:uppercase;color:var(--goldl);margin-top:2.5mm;font-style:normal}}
+.bottom{{position:absolute;left:18mm;bottom:18mm;width:174mm;color:#e8e0d4}}
+.chip{{display:inline-block;border:1pt solid var(--goldl);color:var(--goldl);font-size:8pt;letter-spacing:.2em;text-transform:uppercase;padding:1.4mm 4mm;border-radius:10mm}}
+.bottom .d{{font-size:9.5pt;margin-top:3mm}}
+.bottom .c{{font-size:8.5pt;letter-spacing:.06em;color:var(--goldl);margin-top:1mm}}
 
 /* ---------- Common ---------- */
 .np{{break-before:page}}
@@ -157,18 +166,14 @@ def questions():
 def doc():
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><title>{M['title']}</title><style>{CSS}</style></head><body>
 <section class="cover">
-  <div class="field"></div><div class="ring r3"></div><div class="ring r2"></div><div class="ring r1"></div>
+  <img class="art" src="file://{COVER_ART}" alt="Line drawing of Swami Vivekananda">
+  <div class="lshade"></div><div class="shade"></div><div class="frame"></div>
   <div class="bignum">{NO}</div>
-  <div class="topline">{M['org']}</div>
-  <div class="plate"><img src="{LOGO_URI}" alt="logo"></div>
-  <div class="titleblock"><div class="series">{M['series']}</div><h1>{M['title']}</h1><div class="by">Swami Vivekananda</div></div>
-  <div class="wave"></div>
-  <div class="lower">
-    <div class="quote">{esc(COVER_QUOTE)}</div><div class="qsrc">From the lecture</div>
-    <div class="meta"><span>{M['delivered']}</span><span class="chip">Study Guide {NO}</span></div>
-  </div>
-  <div class="org"><div class="n">{M['org']}</div><div class="c">{M['course']} · {M['web']}</div></div>
-  <div class="foot"></div>
+  <div class="brand"><div class="lp"><img src="{LOGO_URI}" alt="logo"></div><div class="t">Ramakrishna Vedanta<br>Centre NZ</div></div>
+  <div class="titleblock"><div class="series">Vedanta Lectures of<br>Swami Vivekananda</div><div class="rule"></div>
+    <h1>{M['title']}</h1><div class="by">Swami Vivekananda</div></div>
+  <div class="quote">{esc(COVER_QUOTE)}<div class="qsrc">From the lecture</div></div>
+  <div class="bottom"><span class="chip">Study Guide {NO}</span><div class="d">{M['delivered']}</div><div class="c">{M['course']} · {M['web']}</div></div>
 </section>
 <section class="np" style="page:opener">
   <div class="kicker">Before you read</div><h2 class="title">Summary of the Lecture</h2>
