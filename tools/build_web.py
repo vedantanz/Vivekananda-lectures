@@ -91,7 +91,7 @@ footer{{text-align:center;color:var(--muted);font-size:13px;margin-top:48px;bord
 <section id="glossary"><span class="k">Words and references</span><h2 class="t">Glossary</h2><dl>{"".join(f"<dt>{esc(t)}</dt><dd>{esc(d)}</dd>" for t,d in GLOSSARY)}</dl></section>
 <section id="bridge"><span class="k">Vedanta and modern understanding</span><h2 class="t">Bridge to Wellbeing</h2><p class="intro">{esc(BRIDGE_INTRO)}</p>{"".join(f'<div class="card"><h4>{esc(h)}</h4><p>{esc(b)}</p></div>' for h,b in BRIDGE)}</section>
 <section id="questions"><span class="k">For revision and reflection</span><h2 class="t">Questions</h2><ol class="qs">{qs}</ol></section>
-<footer>{M['org']}<br>{M['course']}<br><a href="https://vedanta.nz" style="color:var(--gold)">vedanta.nz</a></footer>
+<footer><p style="font-style:italic;color:var(--ink);font-size:14px">Join the <b>Study of Vivekananda Lectures</b> course on our website, <a href="https://vedanta.nz" style="color:var(--ac)">vedanta.nz</a>.</p>{M['org']}<br>{M['course']}<br><a href="https://vedanta.nz" style="color:var(--gold)">vedanta.nz</a></footer>
 </div></body></html>"""
 
 open(f"{B.OUT}/maya-and-freedom.html", "w").write(page)

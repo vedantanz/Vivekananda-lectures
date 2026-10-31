@@ -13,8 +13,8 @@ CSS = f"""
 @page{{size:A4;margin:24mm 20mm 22mm 24mm;
   @top-left{{content:"Vedanta Lectures of Swami Vivekananda";font:8pt Lora,serif;letter-spacing:.08em;color:#a39890}}
   @top-right{{content:"{M['title']}";font:italic 8.5pt Lora,serif;color:{T['accent']}}}
-  @bottom-center{{content:counter(page);font:700 9pt Lora,serif;color:{T['accent']}}}}}
-@page cover{{margin:0;@top-left{{content:none}}@top-right{{content:none}}@bottom-center{{content:none}}}}
+  @bottom-left{{content:"Ramakrishna Vedanta Centre NZ  ·  Join the Study of Vivekananda Lectures course at vedanta.nz";font:italic 7.8pt Lora,serif;color:#8a7f76;vertical-align:top;padding-top:5mm}}@bottom-right{{content:counter(page);font:700 9pt Lora,serif;color:{T['accent']};vertical-align:top;padding-top:4.6mm}}}}
+@page cover{{margin:0;@top-left{{content:none}}@top-right{{content:none}}@bottom-left{{content:none}}@bottom-right{{content:none}}}}
 @page opener{{@top-left{{content:none}}@top-right{{content:none}}}}
 body{{font-family:Lora,serif;font-size:10.6pt;line-height:1.62;color:var(--ink)}}
 
