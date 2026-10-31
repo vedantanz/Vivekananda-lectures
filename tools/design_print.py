@@ -86,7 +86,6 @@ h3.sec{{font-size:12pt;color:var(--ac);margin:6mm 0 2mm;break-after:avoid;font-w
 h3.sec .sn{{display:inline-block;width:6.2mm;height:6.2mm;border-radius:50%;border:0.8pt solid var(--ac);font-size:8pt;
   text-align:center;line-height:6mm;margin-right:2.5mm;vertical-align:1pt;font-weight:400}}
 p.lp{{text-align:justify;hyphens:auto;margin:0 0 3mm}}
-.part + h3.sec + p.lp::first-letter{{float:left;font-size:30pt;line-height:.9;padding:1mm 2mm 0 0;color:var(--ac);font-weight:700}}
 .pn{{float:left;margin-left:-12mm;width:9mm;text-align:right;font-size:7.5pt;color:var(--ac);opacity:.75;padding-top:1.2pt}}
 blockquote.verse{{margin:3mm 6mm 4mm;padding:4mm 5mm;background:var(--soft);border-radius:2mm;border-left:2.5pt solid var(--gold);break-inside:avoid}}
 .dev{{display:block;font-family:FreeSerif,serif;font-size:12.5pt;line-height:1.7;color:var(--deep)}}
