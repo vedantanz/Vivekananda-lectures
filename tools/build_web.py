@@ -43,8 +43,8 @@ background:radial-gradient(circle at 50% 30%, {T['glow']} 0%, {T['accent']} 38%,
 header.hero .org,header.hero .series{{color:var(--goldl)}} header.hero h1{{color:#fff}} header.hero .del{{color:#e8e0d4}}
 header.hero .badge{{border-color:var(--goldl);color:var(--goldl)}}
 .heroart{{position:absolute;right:-125px;bottom:0;height:430px;width:auto !important;opacity:.8;pointer-events:none}} .hshade{{position:absolute;inset:0;background:linear-gradient(to right,{T['deep']} 42%,rgba(0,0,0,0) 80%);opacity:.85}} .brandrow{{display:flex;align-items:center;gap:10px}} .htext{{max-width:62%;margin-top:70px}} @media (min-width:600px){{.heroart{{right:4%}} .htext{{max-width:55%}}}} header.hero>*:not(.heroart){{position:relative}}
-.plate{{display:inline-block;width:52px;height:52px;border-radius:50%;background:#fffdf8;box-shadow:0 0 0 2px var(--goldl);flex:none}}
-.plate img{{width:38px !important;margin:6px 0 0 7px}}
+.plate{{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:#fffdf8;box-shadow:0 0 0 2px var(--goldl);flex:none}}
+.plate img{{height:44px !important;width:auto !important;margin:0}}
 header img{{width:110px;height:auto}}
 .org{{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--maroon)}}
 .series{{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:14px}}
@@ -76,7 +76,7 @@ ol.qs li{{margin-bottom:14px}}
 footer{{text-align:center;color:var(--muted);font-size:13px;margin-top:48px;border-top:1px solid var(--rule);padding-top:20px}}
 </style></head><body>
 <header class="hero"><img class="heroart" src="cover-art.png" alt="Line drawing of Swami Vivekananda"><div class="hshade"></div>
-  <div class="brandrow"><div class="plate"><img src="{B.LOGO_URI}" alt="Ramakrishna Vedanta Centre NZ logo"></div><div class="org">Ramakrishna Vedanta<br>Centre NZ</div></div>
+  <div class="brandrow"><div class="plate"><img src="{B.LOGO_URI}" alt="Ramakrishna Vedanta Centre NZ logo"></div><div class="org" style="font-size:14px;font-weight:700;line-height:1.4">Ramakrishna Vedanta<br>Centre NZ</div></div>
   <div class="htext"><div class="series">Vedanta Lectures of Swami Vivekananda</div>
   <h1>{M['title']}</h1>
   <div class="by">Swami Vivekananda</div><div class="del">{M['delivered']}</div>

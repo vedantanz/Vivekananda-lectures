@@ -40,9 +40,9 @@ body{{font-family:Lora,serif;font-size:10.6pt;line-height:1.62;color:var(--ink)}
   background:linear-gradient(to right, {T['deep']} 0%, rgba(0,0,0,0) 100%);opacity:.55}}
 .frame{{position:absolute;left:8mm;top:8mm;width:194mm;height:281mm;border:0.6pt solid rgba(233,201,135,.45)}}
 .brand{{position:absolute;left:18mm;top:18mm;display:flex;align-items:center;gap:4mm}}
-.brand .lp{{width:20mm;height:20mm;border-radius:50%;background:#fffdf8;box-shadow:0 0 0 1.2pt var(--goldl)}}
-.brand .lp img{{width:14mm;margin:2.4mm 0 0 3mm}}
-.brand .t{{font-size:8.5pt;letter-spacing:.22em;text-transform:uppercase;color:var(--goldl);line-height:1.5}}
+.brand .lp{{position:relative;flex:none;width:22mm;height:22mm;border-radius:50%;background:#fffdf8;box-shadow:0 0 0 1.2pt var(--goldl)}}
+.brand .lp img{{position:absolute;height:17mm;width:14.3mm;left:3.85mm;top:2.5mm}}
+.brand .t{{font-size:11pt;letter-spacing:.2em;text-transform:uppercase;color:var(--goldl);line-height:1.45;white-space:nowrap;font-weight:700}}
 .bignum{{position:absolute;right:16mm;top:12mm;font-size:60pt;font-weight:700;color:rgba(255,255,255,.12);line-height:1}}
 .titleblock{{position:absolute;top:74mm;left:18mm;width:92mm;color:#fff}}
 .titleblock .series{{font-size:8.5pt;letter-spacing:.24em;text-transform:uppercase;color:var(--goldl);line-height:1.6}}
@@ -93,7 +93,7 @@ ol.points strong{{color:var(--deep)}}
 .part.first{{margin-top:0 !important}}
 .part .pk{{font-size:8pt;letter-spacing:.26em;text-transform:uppercase;color:var(--goldl)}}
 .part h2{{font-size:18pt;margin:1mm 0 0;font-weight:700}}
-.part .pn2{{position:absolute;right:5mm;top:-3mm;font-size:52pt;font-weight:700;color:rgba(255,255,255,.12)}}
+.part .pn2{{position:absolute;right:6mm;top:-1mm;font-size:50pt;font-weight:700;color:var(--goldl);opacity:.6}}
 h3.sec{{font-size:12pt;color:var(--ac);margin:6mm 0 2mm;break-after:avoid;font-weight:700}}
 h3.sec .sn{{display:inline-block;width:6.2mm;height:6.2mm;border-radius:50%;border:0.8pt solid var(--ac);font-size:8pt;
   text-align:center;line-height:6mm;margin-right:2.5mm;vertical-align:1pt;font-weight:400}}
